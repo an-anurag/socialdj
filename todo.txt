@@ -1,0 +1,8 @@
+1. sms notification (twilio integration)
+2. social login
+3. post geolocation
+4. integrate diqus
+5. multimedia content posting
+6. like, comment, share
+7. notifications
+8. chatting
