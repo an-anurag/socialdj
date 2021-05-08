@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-l-2f@&i%+w3+mx31^&eg3uas%%gwk0^dt^h&7#w1)igox=(as2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['socialdj', '127.0.0.1']
 
 
 # Application definition
@@ -166,7 +166,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = 'profiles:profile'
+LOGIN_REDIRECT_URL = 'profile:home'
 # https://django-allauth.readthedocs.io/en/latest/views.html#logout-account-logout
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 # https://django-allauth.readthedocs.io/en/latest/installation.html?highlight=backends
@@ -182,7 +182,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 
 # django messages

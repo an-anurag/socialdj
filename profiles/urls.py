@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
 
-app_name = 'profiles'
+app_name = 'profile'
 
 urlpatterns = [
-    path('profile/', views.profile_view, name='profile'),
+    path('home/', views.home, name='home'),
+    path('<slug:slug>/', views.profile_detail, name='profile_detail'),
+
 ]
