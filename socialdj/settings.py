@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     # Local
     'accounts',
     'profiles',
-    'feed',
+    'feeds',
 
     # third party
     'allauth',
@@ -166,7 +166,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = 'profile:home'
+LOGIN_REDIRECT_URL = 'feeds:feeds'
 # https://django-allauth.readthedocs.io/en/latest/views.html#logout-account-logout
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 # https://django-allauth.readthedocs.io/en/latest/installation.html?highlight=backends

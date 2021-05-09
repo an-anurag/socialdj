@@ -14,11 +14,3 @@ def profile_detail(request, slug=None):
     profile = Profile.objects.get(slug=slug)
     return render(request, 'profiles/profile.html', context={'profile': profile})
 
-
-@login_required
-def home(request):
-    """
-    home url to redirect user to their profile
-    """
-    profile = request.user.profile
-    return HttpResponseRedirect(profile.get_absolute_url())

@@ -25,6 +25,7 @@ urlpatterns = [
     path('about/', views.AboutView.as_view(), name='about'),
     path('accounts/', include('allauth.urls')),
     path('profile/', include('profiles.urls')),
+    path('feeds/', include('feeds.urls')),
 
 ]
 
