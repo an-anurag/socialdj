@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'accounts',
     'profiles',
     'feeds',
+    'notifications',
 
     # third party
     'allauth',

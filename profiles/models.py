@@ -3,6 +3,7 @@ from django.urls import reverse
 # Create your models here.
 
 from django.contrib.auth.models import User
+from .managers import ProfileManager
 # Create your models here.
 import uuid
 
@@ -19,9 +20,12 @@ class Profile(models.Model):
     picture = models.ImageField(blank=True)
     mobile = models.CharField(max_length=10, null=True, blank=True)
     address = models.TextField(max_length=1000, null=True, blank=True)
+    verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    objects = ProfileManager()
 
     class Meta:
         ordering = ('created',)
@@ -31,6 +35,19 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         return reverse('profile:profile_detail', args=[self.slug])
+
+    @property
+    def username(self):
+        return self.user.username
+
+    @property
+    def full_name(self):
+        return self.user.first_name + ' ' + self.user.last_name
+
+    def set_active(self):
+        if self.verified:
+            self.is_active = True
+            self.save()
 
 
 class Connection(models.Model):

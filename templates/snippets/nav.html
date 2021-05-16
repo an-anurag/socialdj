@@ -9,13 +9,13 @@
         {#            make cliked link active#}
         <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
-                <a class="nav-link active" aria-current="page" href="#">Feeds</a>
-                <a class="nav-link" href="#">Profile</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'feeds:feeds' %}">Feeds</a>
+                <a class="nav-link" href="{% url 'profiles:profile_detail' request.user.profile.slug %}">Profile</a>
                 <a class="nav-link" href="#">Friends</a>
                 <span class="badge bg-light text-dark my-auto">55</span>
                 <a class="nav-link" href="#">Explore</a>
-                <a class="nav-link" href="#">Suggestions</a>
-                <a class="nav-link" href="#">Notifications</a>
+                <a class="nav-link" href="{% url 'profiles:suggestions' %}">Suggestions</a>
+                <a class="nav-link" href="{% url 'notifications:notifications' %}">Notifications</a>
                 <span class="badge bg-light text-dark align-text-bottom my-auto">25</span>
 
                 <li class="nav-item dropdown">

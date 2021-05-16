@@ -19,6 +19,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HomeView.as_view(), name='home'),
@@ -26,8 +28,12 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('profile/', include('profiles.urls')),
     path('feeds/', include('feeds.urls')),
+    path('notifications/', include('notifications.urls')),
 
 ]
+
+handler404 = 'socialdj.views.page_not_found'
+
 
 if settings.DEBUG:
     import debug_toolbar
