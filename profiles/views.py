@@ -31,6 +31,7 @@ def suggestions(request):
     """
 
     context = {}
+    recommendations = []
     # excluding current user
     recommendations = Profile.objects.exclude(user__username__iexact=request.user.username)
     print(recommendations)
@@ -42,6 +43,10 @@ def suggestions(request):
 
     # TODO: exclude those profiles to which there is already a friend request sent
     # code here and update the context
+    my_profile = request.user.profile
+    cons = Connection.objects.filter(from_profile=my_profile, status='requested')
+    print(cons)
+
     context['profiles'] = recommendations
     return render(request, 'profiles/suggestions.html', context=context)
 
@@ -71,5 +76,13 @@ def connect_request(request, profile_id):
     return HttpResponseRedirect(reverse('profiles:suggestions'))
 
 
-def accept_request(request):
-    pass
+def accept_request(request, event_id):
+    cons = Connection.objects.get(id=event_id)
+    cons.status = 'accepted'
+    cons.save()
+
+
+def reject_request(request, event_id):
+    cons = Connection.objects.get(id=event_id)
+    cons.status = 'rejected'
+    cons.save()

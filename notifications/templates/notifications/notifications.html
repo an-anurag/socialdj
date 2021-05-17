@@ -15,7 +15,8 @@
         <div class="alert alert-primary" role="alert">
             <a href="{% url 'profiles:profile_detail' notification.actor.slug %}">{{ notification.actor }}</a>
             {{ notification.activity_type.verb }}
-            <a href="">Accept</a> or <a href="">Decline</a>
+            <a href="{% url 'profiles:accept_request' notification.event_id %}">Accept</a> or <a
+                href="{% url 'profiles:reject_request' notification.event_id %}">Decline</a>
         </div>
     {% endfor %}
 
