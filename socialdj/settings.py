@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-l-2f@&i%+w3+mx31^&eg3uas%%gwk0^dt^h&7#w1)igox=(as2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['socialdj', '127.0.0.1']
+ALLOWED_HOSTS = ['socialdj.com', '127.0.0.1', 'www.socialdj.com', '129.146.155.229']
 
 
 # Application definition
