@@ -3,7 +3,7 @@ from django.urls import reverse
 # Create your models here.
 
 from django.contrib.auth.models import User
-from .managers import ProfileManager
+from .managers import ProfileManager, ConnectionManager
 # Create your models here.
 import uuid
 
@@ -49,6 +49,14 @@ class Profile(models.Model):
             self.is_active = True
             self.save()
 
+    def connection_count(self):
+        profiles = []
+        cons = self.follows.all()
+        for request in cons:
+            if request.status == 'accepted':
+                profiles.append(request.to_profile)
+        return len(profiles)
+
 
 class Connection(models.Model):
     """
@@ -59,7 +67,6 @@ class Connection(models.Model):
         ('requested', 'Requested'),
         ('accepted', 'Accepted'),
         ('rejected', 'Rejected'),
-
     )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     from_profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='follows')
@@ -69,11 +76,17 @@ class Connection(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    objects = ConnectionManager()
+
     class Meta:
         ordering = ('created',)
 
     def __str__(self):
         return "Connection request from {} to {}".format(self.from_profile, self.to_profile)
+
+    def connect(self):
+        self.status = 'accepted'
+        self.save()
 
 
 Profile.add_to_class('following', models.ManyToManyField('self', through=Connection, related_name='followers'))

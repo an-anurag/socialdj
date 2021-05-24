@@ -9,13 +9,13 @@ class Activity(models.Model):
 
     """
     Possible activity type
-    unicast
-    broadcast
+    connection
+    comment
 
     possible subtypes
-    accepted
-    declined
-    commented
+    accept
+    reject
+    comment
     """
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -32,6 +32,13 @@ class Activity(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    @classmethod
+    def get_activity(cls, activity=None, subtype=None):
+        if subtype:
+            return cls.objects.filter(activity__iexact=activity, subtype__iexact=subtype).first()
+        if not subtype:
+            return cls.objects.filter(activity__iexact=activity).first()
 
 
 class Notifications(models.Model):
@@ -51,10 +58,20 @@ class Notifications(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('created',)
+        ordering = ('-created',)
 
     def __str__(self):
         return str(self.id)
+
+    @classmethod
+    def notify(cls, actor, recipient, activity_type, event_id, description):
+        cls.objects.create(
+            actor=actor,
+            recipient=recipient,
+            activity_type=activity_type,
+            event_id=event_id,
+            description=description
+        )
 
     def timesince(self, now=None):
         return timesince(self.created, now)

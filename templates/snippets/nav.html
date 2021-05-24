@@ -11,13 +11,12 @@
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
                 <a class="nav-link active" aria-current="page" href="{% url 'feeds:feeds' %}">Feeds</a>
                 <a class="nav-link" href="{% url 'profiles:profile_detail' request.user.profile.slug %}">Profile</a>
-                <a class="nav-link" href="#">Friends</a>
-                <span class="badge bg-light text-dark my-auto">55</span>
+                <a class="nav-link" href="{% url 'connections:connections' %}">Connections</a>
+                <span class="badge bg-light text-dark my-auto">{{ request.user.profile.connection_count }}</span>
                 <a class="nav-link" href="#">Explore</a>
                 <a class="nav-link" href="{% url 'profiles:suggestions' %}">Suggestions</a>
                 <a class="nav-link" href="{% url 'notifications:notifications' %}">Notifications</a>
-                <span class="badge bg-light text-dark align-text-bottom my-auto">25</span>
-
+                <span class="badge bg-light text-dark align-text-bottom my-auto">{{ request.user.profile.notifications.count }}</span>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
                        aria-expanded="false">Settings</a>

@@ -10,7 +10,12 @@ class NotificationsView(View):
     template_name = 'notifications/notifications.html'
 
     def get(self, request):
-        # show only unread notifications
-        # categories the notification according to activity type
-        notifications = Notifications.objects.filter(recipient=request.user.profile)
-        return render(request, self.template_name, {'notifications': notifications})
+        conn_updates = Notifications.objects.filter(
+            recipient=request.user.profile,
+            unread=True,
+            activity_type__activity__contains='connection'
+        ).order_by('-created')
+
+        # for future feed app
+        updates = None
+        return render(request, self.template_name, {'conn_updates': conn_updates, 'updates': updates})

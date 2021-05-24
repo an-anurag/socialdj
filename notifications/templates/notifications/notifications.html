@@ -11,14 +11,28 @@
         </div>
     </div>
 
-    {% for notification in notifications %}
-        <div class="alert alert-primary" role="alert">
-            <a href="{% url 'profiles:profile_detail' notification.actor.slug %}">{{ notification.actor }}</a>
-            {{ notification.activity_type.verb }}
-            <a href="{% url 'profiles:accept_request' notification.event_id %}">Accept</a> or <a
-                href="{% url 'profiles:reject_request' notification.event_id %}">Decline</a>
-        </div>
-    {% endfor %}
+    <h6>Connection updates</h6>
 
+    {% if conn_updates %}
+        {% for notification in conn_updates %}
+            {% with notification.activity_type.subtype as subtype %}
+                {% if subtype == 'request' %}
+                    {% include 'notifications/snippets/connection_request.html' %}
+                {% elif subtype == 'accept' %}
+                    {% include 'notifications/snippets/connection_accept.html' %}
+                {% elif subtype == 'decline' %}
+                    {% include 'notifications/snippets/connection_declined.html' %}
+                {% endif %}
+            {% endwith %}
+        {% endfor %}
+    {% else %}
+        <p>You do not have any connection update</p>
+    {% endif %}
+
+    <h6>Other updates</h6>
+    {% if updates %}
+    {% else %}
+        <p>You do not have any updates</p>
+    {% endif %}
 
 {% endblock %}

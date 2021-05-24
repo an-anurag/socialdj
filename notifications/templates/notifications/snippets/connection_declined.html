@@ -1,0 +1,4 @@
+<div class="alert alert-primary" role="alert">
+    <a href="{% url 'profiles:profile_detail' notification.actor.slug %}">{{ notification.actor }}</a>
+    {{ notification.activity_type.verb }}
+</div>
