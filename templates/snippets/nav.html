@@ -10,7 +10,7 @@
         <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
                 <a class="nav-link active" aria-current="page" href="{% url 'feeds:feeds' %}">Feeds</a>
-                <a class="nav-link" href="{% url 'profiles:profile_detail' request.user.profile.slug %}">Profile</a>
+                <a class="nav-link" href="{{ request.user.profile.get_absolute_url }}">Profile</a>
                 <a class="nav-link" href="{% url 'connections:connections' %}">Connections</a>
                 <span class="badge bg-light text-dark my-auto">{{ request.user.profile.connection_count }}</span>
                 <a class="nav-link" href="#">Explore</a>

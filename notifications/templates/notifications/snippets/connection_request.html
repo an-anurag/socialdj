@@ -1,5 +1,5 @@
 <div class="alert alert-primary" role="alert">
-    <a href="{% url 'profiles:profile_detail' notification.actor.slug %}">{{ notification.actor }}</a>
+    <a href="{{ notification.actor.get_absolute_url }}">{{ notification.actor }}</a>
     {{ notification.activity_type.verb }}
     <a href="{% url 'profiles:process_request' notification.event_id 'accept' %}">Accept</a> or <a
         href="{% url 'profiles:process_request' notification.event_id 'reject' %}">Reject</a>

@@ -4,7 +4,6 @@ from django.urls import reverse
 
 from django.contrib.auth.models import User
 from .managers import ProfileManager, ConnectionManager
-# Create your models here.
 import uuid
 
 
@@ -34,7 +33,7 @@ class Profile(models.Model):
         return self.slug
 
     def get_absolute_url(self):
-        return reverse('profile:profile_detail', args=[self.slug])
+        return reverse('profiles:profile_detail', args=[self.slug])
 
     @property
     def username(self):
@@ -84,8 +83,12 @@ class Connection(models.Model):
     def __str__(self):
         return "Connection request from {} to {}".format(self.from_profile, self.to_profile)
 
-    def connect(self):
+    def accept(self):
         self.status = 'accepted'
+        self.save()
+
+    def reject(self):
+        self.status = 'rejected'
         self.save()
 
 

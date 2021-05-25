@@ -94,14 +94,12 @@ class ProcessRequest(View):
 
         cons = Connection.objects.get(id=event_id)
         if event_type == 'accept':
-            cons.status = 'accepted'
-            cons.save()
+            cons.accept()
             activity = Activity().get_activity(activity='connection', subtype='accept')
             description = cons.to_profile.username + ' ' + activity.verb
             message = 'You accepted the connection request'
         else:
-            cons.status = 'rejected'
-            cons.save()
+            cons.reject()
             activity = Activity().get_activity(activity='connection', subtype='reject')
             description = cons.to_profile.username + ' ' + activity.verb
             message = 'You rejected the connection request'
